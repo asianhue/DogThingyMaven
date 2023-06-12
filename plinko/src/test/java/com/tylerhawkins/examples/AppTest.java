@@ -43,7 +43,7 @@ public class AppTest
 
         assertEquals("they scream", dog1.getBark());
         assertNotSame("loud", dog2.getBark());
-        assertEquals("loudasdfasdfwerweqr", dog3.getBark());
+        assertEquals("loud", dog3.getBark());
 
         assertEquals("Chihuahua", dog1.getBreed());
         assertEquals("Labradoodle", dog2.getBreed());
