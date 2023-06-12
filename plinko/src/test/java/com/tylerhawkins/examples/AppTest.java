@@ -40,17 +40,25 @@ public class AppTest
     public void testApp()
     {
         assertTrue( true );
-    }
 
-    public void barkTest(){
         assertEquals("they scream", dog1.getBark());
         assertNotSame("loud", dog2.getBark());
         assertEquals("loudasdfasdfwerweqr", dog3.getBark());
-    }
 
-    public void breedTest(){
         assertEquals("Chihuahua", dog1.getBreed());
         assertEquals("Labradoodle", dog2.getBreed());
         assertNotSame("Labradoogdle", dog3.getBreed());
     }
+
+    // public void barkTest(){
+    //     assertEquals("they scream", dog1.getBark());
+    //     assertNotSame("loud", dog2.getBark());
+    //     assertEquals("loudasdfasdfwerweqr", dog3.getBark());
+    // }
+
+    // public void breedTest(){
+    //     assertEquals("Chihuahua", dog1.getBreed());
+    //     assertEquals("Labradoodle", dog2.getBreed());
+    //     assertNotSame("Labradoogdle", dog3.getBreed());
+    // }
 }
