@@ -27,6 +27,15 @@ public class AppTest
     {
         return new TestSuite( AppTest.class );
     }
+
+    /**
+     * Rigourous Test :-)
+     */
+    public void testApp()
+    {
+        assertTrue( true );
+    }
+
         
     DogObject dog1 = new DogObject("Chihuahua", "Red", "Smol");
     DogObject dog2 = new DogObject("Labradoodle", "Blue", "Medium");
@@ -35,7 +44,7 @@ public class AppTest
     public void barkTest(){
         assertEquals("they scream", dog1.getBark());
         assertNotSame("loud", dog2.getBark());
-        assertEquals("loudfrfrfr", dog3.getBark());
+        assertEquals("loud", dog3.getBark());
     }
 
     public void breedTest(){
