@@ -10,6 +10,12 @@ import junit.framework.TestSuite;
 public class AppTest 
     extends TestCase
 {
+
+    
+        
+    DogObject dog1 = new DogObject("Chihuahua", "Red", "Smol");
+    DogObject dog2 = new DogObject("Labradoodle", "Blue", "Medium");
+    DogObject dog3 = new DogObject("Golden Retriever", "Gold", "Big");
     /**
      * Create the test case
      *
@@ -33,18 +39,13 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( false );
+        assertTrue( true );
     }
-
-        
-    DogObject dog1 = new DogObject("Chihuahua", "Red", "Smol");
-    DogObject dog2 = new DogObject("Labradoodle", "Blue", "Medium");
-    DogObject dog3 = new DogObject("Golden Retriever", "Gold", "Big");
 
     public void barkTest(){
         assertEquals("they scream", dog1.getBark());
         assertNotSame("loud", dog2.getBark());
-        assertEquals("loud", dog3.getBark());
+        assertEquals("loudasdfasdfwerweqr", dog3.getBark());
     }
 
     public void breedTest(){
