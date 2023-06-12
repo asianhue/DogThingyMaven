@@ -9,34 +9,7 @@ import junit.framework.TestSuite;
  */
 public class AppTest 
     extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
-
-        
+{       
     DogObject dog1 = new DogObject("Chihuahua", "Red", "Smol");
     DogObject dog2 = new DogObject("Labradoodle", "Blue", "Medium");
     DogObject dog3 = new DogObject("Golden Retriever", "Gold", "Big");
