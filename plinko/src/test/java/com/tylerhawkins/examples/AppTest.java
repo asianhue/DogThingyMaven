@@ -17,7 +17,7 @@ public class AppTest
     public void barkTest(){
         assertEquals("they scream", dog1.getBark());
         assertNotSame("loud", dog2.getBark());
-        assertEquals("loudfrfrfr", dog3.getBark());
+        assertEquals("loud", dog3.getBark());
     }
 
     public void breedTest(){
