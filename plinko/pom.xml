@@ -16,8 +16,8 @@
     </dependency>
   </dependencies>
   <properties>
-  <maven.compiler.source></maven.compiler.source>
-  <maven.compiler.target></maven.compiler.target>
+  <maven.compiler.source>11.0.14.1</maven.compiler.source>
+  <maven.compiler.target>11.0.14.1</maven.compiler.target>
 </properties>
 </project>
 
