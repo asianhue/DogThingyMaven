@@ -16,9 +16,9 @@
     </dependency>
   </dependencies>
   <properties>
-    <java.version>7</java.version>
-  <maven.compiler.source>7</maven.compiler.source>
-  <maven.compiler.target>7</maven.compiler.target>
+    <java.version>20.0.1</java.version>
+  <maven.compiler.source>20.0.1</maven.compiler.source>
+  <maven.compiler.target>20.0.1</maven.compiler.target>
 </properties>
 </project>
 
