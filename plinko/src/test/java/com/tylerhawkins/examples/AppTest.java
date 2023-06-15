@@ -39,8 +39,6 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
-
         assertEquals("they scream", dog1.getBark());
         assertNotSame("loud", dog2.getBark());
         assertEquals("loud", dog3.getBark());
