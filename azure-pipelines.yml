@@ -52,6 +52,7 @@ jobs:
 
       # Step 4: Merge the test branch into the main branch
       - script: |
+          git checkout main
           git merge test --no-ff --no-commit
         displayName: Merge Test Branch
 
