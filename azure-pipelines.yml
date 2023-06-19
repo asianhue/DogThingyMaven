@@ -45,14 +45,12 @@ jobs:
       vmImage: 'ubuntu-latest'
     steps:
       # Step 3: Checkout the main branch
-      - checkout: self
+      - checkout: main
         persistCredentials: true
         clean: true
-        ref: refs/heads/main
 
       # Step 4: Merge the test branch into the main branch
       - script: |
-          git checkout main
           git merge test --no-ff --no-commit
         displayName: Merge Test Branch
 
