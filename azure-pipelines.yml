@@ -53,10 +53,9 @@ jobs:
       vmImage: 'ubuntu-latest'
     steps:
       # Step 3: Checkout the main branch
-      - checkout: self
-        persistCredentials: true
-        clean: true
-
+      #- checkout: self
+     #   persistCredentials: true
+      #  clean: true
       # Step 4: Switch to the main branch
       - script: |
           git checkout main
