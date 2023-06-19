@@ -44,6 +44,11 @@ jobs:
     steps:
       - checkout: self
       - script: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+        displayName: 'Set Git Identity'
+
+      - script: |
           git remote set-url origin git@github.com:asianhue/DogThingyMaven.git
           git fetch origin
           git checkout main
