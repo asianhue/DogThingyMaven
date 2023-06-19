@@ -37,22 +37,25 @@ jobs:
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
 
-  - job: merge_to_main
-    displayName: Merge and push to main
-    dependsOn: test_code
-    condition: succeeded()  # Run only if the previous job succeeded
+  - job: MergeAndPush
+    displayName: Merge and Push to Main
+    dependsOn: RunTests
+    condition: succeeded('RunTests')
+    pool:
+      vmImage: 'ubuntu-latest'
     steps:
+      # Step 3: Checkout the main branch
       - checkout: self
-      - script: |
-          git config --global user.email "kenneth5982@gmail.com"
-          git config --global user.name "asianhue"
-        displayName: 'Set Git Identity'
+        persistCredentials: true
+        clean: true
+        ref: refs/heads/main
 
+      # Step 4: Merge the test branch into the main branch
       - script: |
-          git remote set-url origin git@github.com:asianhue/DogThingyMaven.git
-          git fetch origin
-          git checkout main
-          git merge test --no-commit --no-ff
-          git commit -m "Merge test branch into main"
+          git merge test --no-ff --no-commit
+        displayName: Merge Test Branch
+
+      # Step 5: Push the changes to the main branch
+      - script: |
           git push origin main
-        displayName: 'Merge and push changes to main'
+        displayName: Push to Main
