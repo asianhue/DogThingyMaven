@@ -52,14 +52,14 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-      # Step 3: Checkout the main branch
-      #- checkout: self
-     #   persistCredentials: true
-      #  clean: true
+       #Step 3: Checkout the main branch
+      - checkout: self
+        persistCredentials: true
+        clean: true
       # Step 4: Switch to the main branch
-      - script: |
-          git checkout main
-        displayName: Switch to Main Branch
+      #- script: |
+       #   git checkout main
+        #displayName: Switch to Main Branch
 
       # Step 5: Merge the test branch into the main branch
       - script: |
