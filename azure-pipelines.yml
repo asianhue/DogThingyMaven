@@ -12,41 +12,44 @@ pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-- job: test_code
-  displayName: Test
-  steps:
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'plinko/pom.xml'
-        mavenOptions: '-Xmx3072m'
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '11'
-        jdkArchitectureOption: 'x64'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        goals: 'package'
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'plinko/pom.xml'
-        goals: 'test'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        javaHomeOption: 'JDKVersion'
-        mavenVersionOption: 'Default'
-        mavenAuthenticateFeed: false
-        effectivePomSkip: false
-        sonarQubeRunAnalysis: false
+  - job: test_code
+    displayName: Test
+    steps:
+      - task: Maven@3
+        inputs:
+          mavenPomFile: 'plinko/pom.xml'
+          mavenOptions: '-Xmx3072m'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '11'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          goals: 'package'
+      - task: Maven@4
+        inputs:
+          mavenPomFile: 'plinko/pom.xml'
+          goals: 'test'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
 
-- job: merge_main
-  displayName: Merge to main
-  dependsOn: test_code
-  condition: succeeded()  # Run only if the previous job succeeded
-  steps:
-    - checkout: self
-    - script: |
-        git config --global user.email "kenneth5982@gmail.com"
-        git config --global user.name "asianhue"
-        git checkout main
-        git merge test --no-ff --no-edit
-        git push origin main
-      displayName: 'Merge and push changes to main'
+  - job: merge_to_main
+    displayName: Merge and push to main
+    dependsOn: test_code
+    condition: succeeded()  # Run only if the previous job succeeded
+    steps:
+      - checkout: self
+      - script: |
+          git config --global user.email "kenneth5982@gmail.com"
+          git config --global user.name "asianhue"
+          git remote set-url origin https://github.com/asianhue/DogThingyMaven.git
+          git fetch origin
+          git checkout main
+          git merge test --no-commit --no-ff
+          git commit -m "Merge test branch into main"
+          git push origin main
+        displayName: 'Merge and push changes to main'
