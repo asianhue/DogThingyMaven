@@ -40,7 +40,6 @@ jobs:
 
 - job: push_main
   displayName: push
-  dependsOn: test_code
   steps:
   - checkout: self
   - script: |
