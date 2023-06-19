@@ -7,15 +7,17 @@ trigger:
   branches:
     include:
       - test
+
+pool:
+  vmImage: 'ubuntu-latest'
+
 resources:
   repositories:
     - repository: DogThingyMaven
       type: github
       name: asianhue/DogThingyMaven
       ref: main
-
-pool:
-  vmImage: 'ubuntu-latest'
+      endpoint: github.com_asianhue
 
 jobs:
   - job: test_code
@@ -45,22 +47,27 @@ jobs:
 
   - job: MergeAndPush
     displayName: Merge and Push to Main
-    dependsOn: RunTests
-    condition: succeeded('RunTests')
+    dependsOn: test_code
+    condition: succeeded('test_code')
     pool:
       vmImage: 'ubuntu-latest'
     steps:
       # Step 3: Checkout the main branch
-      - checkout: main
+      - checkout: self
         persistCredentials: true
         clean: true
 
-      # Step 4: Merge the test branch into the main branch
+      # Step 4: Switch to the main branch
+      - script: |
+          git checkout main
+        displayName: Switch to Main Branch
+
+      # Step 5: Merge the test branch into the main branch
       - script: |
           git merge test --no-ff --no-commit
         displayName: Merge Test Branch
 
-      # Step 5: Push the changes to the main branch
+      # Step 6: Push the changes to the main branch
       - script: |
           git push origin main
         displayName: Push to Main
