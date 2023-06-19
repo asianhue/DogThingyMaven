@@ -4,63 +4,31 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-  branches:
-    include:
-      - test
-resources:
-  repositories:
-    - repository: DogThingyMaven
-      type: github
-      name: asianhue/DogThingyMaven
-      ref: main
+- main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: ubuntu-latest
 
-jobs:
-  - job: test_code
-    displayName: Test
-    steps:
-      - task: Maven@3
-        inputs:
-          mavenPomFile: 'plinko/pom.xml'
-          mavenOptions: '-Xmx3072m'
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: '11'
-          jdkArchitectureOption: 'x64'
-          publishJUnitResults: true
-          testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          goals: 'package'
-      - task: Maven@4
-        inputs:
-          mavenPomFile: 'plinko/pom.xml'
-          goals: 'test'
-          publishJUnitResults: true
-          testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          javaHomeOption: 'JDKVersion'
-          mavenVersionOption: 'Default'
-          mavenAuthenticateFeed: false
-          effectivePomSkip: false
-          sonarQubeRunAnalysis: false
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'plinko/pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
 
-  - job: MergeAndPush
-    displayName: Merge and Push to Main
-    dependsOn: RunTests
-    condition: succeeded('RunTests')
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-      # Step 3: Checkout the main branch
-      - checkout: main
-        persistCredentials: true
-        clean: true
-
-      # Step 4: Merge the test branch into the main branch
-      - script: |
-          git merge test --no-ff --no-commit
-        displayName: Merge Test Branch
-
-      # Step 5: Push the changes to the main branch
-      - script: |
-          git push origin main
-        displayName: Push to Main
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'plinko/pom.xml'
+    goals: 'test'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
