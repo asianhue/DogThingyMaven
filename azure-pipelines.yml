@@ -4,25 +4,17 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-  - test
+  branches:
+    include:
+      - test
 
 pool:
   vmImage: 'ubuntu-latest'
 
+jobs:
+
+- job: Test code using test cases in repository
 steps:
-  - checkout: self
-
-  - script: |
-      git config --global user.email "kenneth5982@gmail.com"
-      git config --global user.name "asianhue"
-      git checkout main
-      git add .
-      git commit -m "Commit message"
-      git remote add origin https://github.com/asianhue/DogThingyMaven.git
-      git push -u origin main
-    displayName: 'Push changes to main'
-    condition: succeeded()  # Run only if pipeline is successful
-
   - task: Maven@3
     inputs:
       mavenPomFile: 'plinko/pom.xml'
@@ -33,7 +25,6 @@ steps:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-
   - task: Maven@4
     inputs:
       mavenPomFile: 'plinko/pom.xml'
@@ -45,3 +36,18 @@ steps:
       mavenAuthenticateFeed: false
       effectivePomSkip: false
       sonarQubeRunAnalysis: false
+
+- job: push code to main if pipeline is successful
+  steps:
+  - checkout: self
+
+    - script: |
+        git config --global user.email "kenneth5982@gmail.com"
+        git config --global user.name "asianhue"
+        git checkout main
+        git add .
+        git commit -m "Commit message"
+        git remote add origin https://github.com/asianhue/DogThingyMaven.git
+        git push -u origin main
+    displayName: 'Push changes to main'
+    condition: succeeded()  # Run only if pipeline is successful      
