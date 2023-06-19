@@ -58,7 +58,7 @@ jobs:
         clean: true
       # Step 4: Switch to the main branch
       - script: |
-          git checkout main
+          git checkout origin/main
         displayName: Switch to Main Branch
 
       # Step 5: Merge the test branch into the main branch
