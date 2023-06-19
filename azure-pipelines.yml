@@ -7,6 +7,12 @@ trigger:
   branches:
     include:
       - test
+resources:
+  repositories:
+    - repository: DogThingyMaven
+      type: github
+      name: asianhue/DogThingyMaven
+      ref: main
 
 pool:
   vmImage: 'ubuntu-latest'
