@@ -13,7 +13,7 @@ public class App {
             System.out.print("How many dogs do you have: ");
             int dogNumber = str.nextInt();
 
-
+            System.out.println("TESTING MESSAGE FOR AUTOMATIC MERGE");
 
             for (int i=0;i<dogNumber;i++){
                 System.out.print("What breed is your dog: ");
