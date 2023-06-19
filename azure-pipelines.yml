@@ -17,21 +17,13 @@ steps:
   - script: |
       git config --global user.email "kenneth5982@gmail.com"
       git config --global user.name "asianhue"
-      git checkout -b build-branch
+      git checkout main
       git add .
       git commit -m "Commit message"
       git remote add origin https://github.com/asianhue/DogThingyMaven.git
-      git push -u origin build-branch
-    displayName: 'Push changes to build-branch'
+      git push -u origin main
+    displayName: 'Push changes to main'
     condition: succeeded()  # Run only if pipeline is successful
-
-  - script: |
-      git config --global user.email "kenneth5982@gmail.com"
-      git config --global user.name "asianhue"
-      git checkout test
-      git merge origin/build-branch
-      git push origin test
-    displayName: 'Merge and push changes to test branch'
 
 - task: Maven@3
   inputs:
