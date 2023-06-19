@@ -4,31 +4,69 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- main
+  branches:
+    include:
+      - test
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'plinko/pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+resources:
+  repositories:
+    - repository: DogThingyMaven
+      type: github
+      name: asianhue/DogThingyMaven
+      ref: main
+      endpoint: github.com_asianhue
 
-- task: Maven@4
-  inputs:
-    mavenPomFile: 'plinko/pom.xml'
-    goals: 'test'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+jobs:
+  - job: test_code
+    displayName: Test
+    steps:
+      - task: Maven@3
+        inputs:
+          mavenPomFile: 'plinko/pom.xml'
+          mavenOptions: '-Xmx3072m'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '11'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          goals: 'package'
+      - task: Maven@4
+        inputs:
+          mavenPomFile: 'plinko/pom.xml'
+          goals: 'test'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
+
+  - job: MergeAndPush
+    displayName: Merge and Push to Main
+    dependsOn: test_code
+    condition: succeeded('test_code')
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+       #Step 3: Checkout the main branch
+      - checkout: self
+        persistCredentials: true
+        clean: true
+      # Step 4: Switch to the main branch
+      #- script: |
+       #   git checkout main
+        #displayName: Switch to Main Branch
+
+      # Step 5: Merge the test branch into the main branch
+      - script: |
+          git merge test --no-ff --no-commit
+        displayName: Merge Test Branch
+
+      # Step 6: Push the changes to the main branch
+      - script: |
+          git push origin main
+        displayName: Push to Main
