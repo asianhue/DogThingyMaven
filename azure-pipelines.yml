@@ -57,13 +57,13 @@ jobs:
         persistCredentials: true
         clean: true
       # Step 4: Switch to the main branch
-      #- script: |
-       #   git checkout main
-        #displayName: Switch to Main Branch
+      - script: |
+          git checkout main
+        displayName: Switch to Main Branch
 
       # Step 5: Merge the test branch into the main branch
       - script: |
-          git merge test --no-ff --no-commit
+          git merge test
         displayName: Merge Test Branch
 
       # Step 6: Push the changes to the main branch
