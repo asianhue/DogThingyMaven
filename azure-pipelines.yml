@@ -47,7 +47,7 @@ jobs:
       git config --global user.name "asianhue"
       git checkout main
       git add .
-      git commit -m "Commit message"
+      git commit -m "Tests passed"
       git remote add origin https://github.com/asianhue/DogThingyMaven.git
       git push -u origin main
     displayName: 'Push changes to main'
