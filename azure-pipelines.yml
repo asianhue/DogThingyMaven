@@ -12,7 +12,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-
 - job: test_code
   displayName: Test
   steps:
@@ -39,17 +38,15 @@ jobs:
         sonarQubeRunAnalysis: false
 
 - job: push_main
-  displayName: push
+  displayName: Push to main
   dependsOn: test_code
+  condition: succeeded()  # Run only if the previous job succeeded
   steps:
-  - checkout: self
-  - script: |
-      git config --global user.email "kenneth5982@gmail.com"
-      git config --global user.name "asianhue"
-      git checkout main
-      git add .
-      git commit -m "Tests passed"
-      git remote add origin https://github.com/asianhue/DogThingyMaven.git
-      git push -u origin main
-    displayName: 'Push changes to main'
-    condition: succeeded()  # Run only if pipeline is successful      
+    - checkout: self
+    - script: |
+        git config --global user.email "kenneth5982@gmail.com"
+        git config --global user.name "asianhue"
+        git checkout main
+        git merge origin/test
+        git push origin main
+      displayName: 'Push changes to main'
