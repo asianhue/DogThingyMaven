@@ -74,5 +74,5 @@ jobs:
 
     # Push the changes to the main branch
     - script: |
-        git push origin main
+        git push origin/main
       displayName: Push to Main
