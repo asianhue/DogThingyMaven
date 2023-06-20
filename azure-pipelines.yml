@@ -46,6 +46,7 @@ jobs:
           sonarQubeRunAnalysis: false
   - job: SetupSSHPath
     steps:
+      #Step 1: Setup ssh connection
       - task: UseSsh@0
         inputs:
           sshPublicKey: 
