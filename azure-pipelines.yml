@@ -52,31 +52,30 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - checkout: self
-      persistCredentials: true
-      clean: true
+      - checkout: self
+        persistCredentials: true
+        clean: true
 
-    # Authorize Github Credentials
-    - script: |
-        git config --global user.email "kenneth5982@gmail.com" && git config --global user.name "asianhue"
-      displayName: Set Git User Information
+      # Authorize Github Credentials
+      - script: |
+          git config --global user.email "kenneth5982@gmail.com" && git config --global user.name "asianhue"
+        displayName: Set Git User Information
       
-    # Switch to the main branch
-    - script: |
-        git fetch --prune --unshallow
-        git checkout origin/main
-      displayName: Switch to Main Branch
+      # Switch to the main branch
+      - script: |
+          git fetch --prune --unshallow
+          git checkout origin/main
+        displayName: Switch to Main Branch
 
-    # Merge the test branch into the main branch
-    - script: |
-        git merge origin/test
-      displayName: Merge Test Branch
+      # Merge the test branch into the main branch
+      - script: |
+          git merge origin/test
+        displayName: Merge Test Branch
 
-    # Push the changes to the main branch
-    - script: |
-        git push origin HEAD:main
-
-      displayName: Push to Main
+      # Push the changes to the main branch
+      - script: |
+          git push origin HEAD:main
+        displayName: Push to Main
 
   - job: Deployment
     displayName: Deploy Stuff IDK
