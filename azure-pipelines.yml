@@ -44,7 +44,11 @@ jobs:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
-
+  - job: SetupSSHPath
+    steps:
+      - task: UseSsh@0
+        inputs:
+          sshPublicKey: 
   - job: MergeAndPush
     displayName: Merge and Push to Main
     dependsOn: test_code
