@@ -44,12 +44,6 @@ jobs:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
-  - job: SetupSSHPath
-    steps:
-      #Step 1: Setup ssh connection
-      - task: SSHDeployTask@0
-        inputs:
-          sshEndpoint: ssh-github-connection
 
   - job: MergeAndPush
     displayName: Merge and Push to Main
