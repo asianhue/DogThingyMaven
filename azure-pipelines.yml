@@ -77,3 +77,12 @@ jobs:
         git push origin HEAD:main
 
       displayName: Push to Main
+
+  - job:  Deployment
+    displayName: Deploy Stuff IDK
+    environment: 'Test Environment'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - script: echo It worked
