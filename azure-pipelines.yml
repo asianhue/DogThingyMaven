@@ -47,10 +47,9 @@ jobs:
   - job: SetupSSHPath
     steps:
       #Step 1: Setup ssh connection
-      - task: UseSsh@0
+      - task: SSHDeployTask@0
         inputs:
-          sshPublicKey: '$(ssh-github-connection.securePrivateKey)'
-          sshKeySecureFile: '$(ssh-github-connection.sshPrivateKey)'
+          sshEndpoint: ssh-github-connection
 
   - job: MergeAndPush
     displayName: Merge and Push to Main
