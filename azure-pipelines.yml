@@ -17,7 +17,7 @@ resources:
       type: github
       name: asianhue/DogThingyMaven
       ref: main
-      endpoint: github.com_asianhue
+      endpoint: asianhue
 
 jobs:
   - job: test_code
