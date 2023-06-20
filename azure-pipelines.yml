@@ -56,24 +56,23 @@ jobs:
       persistCredentials: true
       clean: true
 
-# Authorize Github Credentials
+    # Authorize Github Credentials
     - script: |
         git config --global user.email "kenneth5982@gmail.com" && git config --global user.name "asianhue"
       displayName: Set Git User Information
       
-# Switch to the main branch
+    # Switch to the main branch
     - script: |
         git fetch --prune --unshallow
         git checkout origin/main
       displayName: Switch to Main Branch
 
-# Merge the test branch into the main branch
+    # Merge the test branch into the main branch
     - script: |
         git merge origin/test
       displayName: Merge Test Branch
 
-# Push the changes to the main branch
+    # Push the changes to the main branch
     - script: |
-        git push origin origin/main
+        git push origin main
       displayName: Push to Main
-
