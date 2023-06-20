@@ -47,7 +47,7 @@ public class DogObject {
     public String getBark(){
         String bark;
         if(breed == "Chihuahua"){
-            bark = "they screallllm";
+            bark = "they scream";
         }else if(breed == "Labradoodle"){
             bark = "idk they bark like a labradoodle";
         }else if(breed == "Husky"){
