@@ -78,7 +78,7 @@ jobs:
 
       displayName: Push to Main
 
-  - job:  Deployment
+  - job: Deployment
     displayName: Deploy Stuff IDK
     environment: 'Test Environment'
     strategy:
