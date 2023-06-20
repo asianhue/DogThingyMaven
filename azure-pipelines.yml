@@ -63,9 +63,9 @@ jobs:
       displayName: Switch to Main Branch
     # Identity Authorization
     - script:
-        git config --global user.email kenneth5982@gmail.com
-        git config --global user.name asianhue
-        git config --global user.password smoochamoocha123
+        git config --global user.email "kenneth5982@gmail.com"
+        git config --global user.name "asianhue"
+      displayName: Set Git User Information
 # Merge the test branch into the main branch
     - script: |
         git merge origin/test
