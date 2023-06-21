@@ -97,3 +97,16 @@ stages:
             steps:
               - script: echo This is a DEPLOYMENT job
                 displayName: 'Deploy Project'
+
+- stage: Artifact
+  displayName: Creating Artifact
+  jobs:
+    - job: CreateArtifactJob
+      displayName: Create Artifact
+      steps:
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)'
+            artifact: 'TestArtifact'
+            publishLocation: 'pipeline'
+
