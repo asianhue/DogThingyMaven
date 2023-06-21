@@ -48,10 +48,15 @@ stages:
 - stage: PushToMain
   displayName: Push to Main
   jobs:
+    - job: DummyJob
+      displayName: Dummy Job
+      steps:
+        - script: echo This is a dummy job
+          displayName: 'Dummy Job'
     - job: MergeAndPush
       displayName: Merge and Push to Main
-      dependsOn: test_code
-      condition: succeeded('test_code')
+      dependsOn: DummyJob
+      condition: succeeded('DummyJob')
       pool:
         vmImage: 'ubuntu-latest'
       steps:
