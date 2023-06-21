@@ -66,4 +66,29 @@ stages:
 
         # Switch to the main branch
         - script: |
-            git fetch --prune --un
+            git fetch --prune --unshallow
+            git checkout origin/main
+          displayName: Switch to Main Branch
+
+        # Merge the test branch into the main branch
+        - script: |
+            git merge origin/test
+          displayName: Merge Test Branch
+
+        # Push the changes to the main branch
+        - script: |
+            git push origin HEAD:main
+          displayName: Push to Main
+
+- stage: DeployToEnvironment
+  displayName: Deploy To Environment
+  jobs:
+    - deployment: deploy
+      displayName: Deploy
+      environment: Development
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo This is a DEPLOYMENT job
+                displayName: 'Deploy Project'
