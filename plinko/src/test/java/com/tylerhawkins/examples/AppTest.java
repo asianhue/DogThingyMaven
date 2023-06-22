@@ -10,9 +10,6 @@ import junit.framework.TestSuite;
 public class AppTest 
     extends TestCase
 {
-
-    
-        
     DogObject dog1 = new DogObject("Chihuahua", "Red", "Smol");
     DogObject dog2 = new DogObject("Labradoodle", "Blue", "Medium");
     DogObject dog3 = new DogObject("Golden Retriever", "Gold", "Big");
