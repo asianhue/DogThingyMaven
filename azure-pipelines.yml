@@ -101,12 +101,13 @@ stages:
 - stage: Artifact
   displayName: Creating Artifact
   jobs:
-    - job: CreateArtifactJob
-      displayName: Create Artifact
-      steps:
-        - task: PublishPipelineArtifact@1
-          inputs:
-            targetPath: '$(Pipeline.Workspace)'
-            artifact: 'TestArtifact'
-            publishLocation: 'pipeline'
+  - job:
+    steps:
+    - bash: |
+        echo "##vso[task.setvariable variable=ArtifactName]MyArtifacts-$(date +%Y%m%d%H%M%S)"
+      displayName: 'Set Artifact Name'
 
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)'  # Specify the path to the artifacts
+        artifactName: '$(ArtifactName)'
