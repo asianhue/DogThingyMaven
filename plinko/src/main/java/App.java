@@ -13,7 +13,7 @@ public class App {
             System.out.print("How many dogs do you have: ");
             int dogNumber = str.nextInt();
 
-            System.out.println("Artifact Message: This should be versoin 2.0 or something idkTEST");
+            System.out.println("KACHOW");
 
             for (int i=0;i<dogNumber;i++){
                 System.out.print("What breed is your dog: ");
