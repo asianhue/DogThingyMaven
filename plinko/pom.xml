@@ -44,10 +44,5 @@
   </snapshots>
 </repository>
 </distributionManagement>
-    <server>
-      <id>Test_Feed</id>
-      <username>kenneth5982</username>
-      <password>ffluoywnndtxf3woanm4f227n55oaj7p5qobhco2s4cptnpxvn3a</password>
-    </server>
 </project>
 
